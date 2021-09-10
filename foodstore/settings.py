@@ -1,12 +1,13 @@
 import os
+from pathlib import Path
+from datetime import timedelta
 
-# Configure Django App for Heroku.
-import django_heroku
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'production')
 
-DEBUG = False
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEBUG = True
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
 ALLOWED_HOSTS = ["https://samuelimoisili.com", "samuelimoisili.com", "samuel2047.herokuapp.com"]
 
@@ -123,4 +124,3 @@ if ENVIRONMENT == 'production':
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     
-django_heroku.settings(locals())    
