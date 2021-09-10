@@ -1,5 +1,8 @@
 import os
 
+# Configure Django App for Heroku.
+import django_heroku
+
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'development')
 
 DEBUG = True
@@ -115,3 +118,5 @@ if ENVIRONMENT == 'production':
     SECURE_REDIRECT_EXEMPT = []
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    
+django_heroku.settings(locals())    
