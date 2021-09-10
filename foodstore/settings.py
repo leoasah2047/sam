@@ -114,7 +114,7 @@ PAYSTACK_SCRET_KEY = 'sk_live_c7a0f04a67f95ace19d2b6e85c1a8c1971eaf26a'
 
 if ENVIRONMENT == 'production':
     DEBUG = False
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
     SESSION_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
     SECURE_CONTENT_TYPE_NOSNIFF = True
