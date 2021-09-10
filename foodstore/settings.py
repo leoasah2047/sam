@@ -9,7 +9,7 @@ ENVIRONMENT = os.getenv('ENVIRONMENT', 'production')
 
 DEBUG = True
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
-ALLOWED_HOSTS = ["https://www.samuelimoisili.com", "samuelimoisili.com", "www.samuelimoisili.com", "samuel2047.herokuapp.com", "https://www.samuel2047.herokuapp.com/"]
+ALLOWED_HOSTS = ['127.0.0.1', 'https://www.samuelimoisili.com', 'samuelimoisili.com', 'www.samuelimoisili.com', 'samuel2047.herokuapp.com', 'https://www.samuel2047.herokuapp.com/']
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
@@ -78,13 +78,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, 'db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dftg6spiui1i9n',
+        'HOST': 'ec2-44-198-100-81.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'jxvblboxdilnci',
+        'PASSWORD': '186aff35392c6fb500cb757b8b29224efb09a428459396b6f5979051204ac4f4'
     }
 }
-
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
