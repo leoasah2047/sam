@@ -9,7 +9,7 @@ ENVIRONMENT = os.getenv('ENVIRONMENT', 'production')
 
 DEBUG = True
 SECRET_KEY = '-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj'
-ALLOWED_HOSTS = ["https://samuelimoisili.com", "samuelimoisili.com", "samuel2047.herokuapp.com"]
+ALLOWED_HOSTS = ["https://samuelimoisili.com", "samuelimoisili.com", "www.samuelimoisili.com", "samuel2047.herokuapp.com"]
 
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
