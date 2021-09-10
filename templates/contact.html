@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<header class="wrappings" id="home">
+  <nav>
+    <div class="logo">
+      <a class="navbar-brand" href="{% url 'home_page' %}">
+        <img src="{% static 'images/logo1.jpg' %}" alt="Your logo" title="Your logo" style="height:40px;" />
+      </a>
+    </div>
+    <input type="checkbox" id="show-menu">
+    <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+    <div class="content">
+      <ul class="links">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'home_page' %}" class="desktop-link">Home</a>
+        </li >
+        <li class="nav-item mr-lg-4">
+          <a  class="nav-link pl-0 pr-0" href="{% url 'about' %}" class="desktop-link">About me</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'products' %}" class="desktop-link">Store</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'checkout' %}" class="desktop-link">Cart</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'contact' %}" class="desktop-link">Contact</a>
+        </li>
+        {% else %}
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'home_page' %}" class="desktop-link">Home</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'about' %}" class="desktop-link">About me</a>
+        </li>        
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'contact' %}" class="desktop-link">Contact</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="/accounts/login" class="desktop-link">Login</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="/accounts/signup" class="desktop-link">Sign Up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- contact form -->
+<section class="w3l-contacts-12 py-5" id="contact">
+	<div class="container py-md-3">
+		<div class="contacts12-main">
+			<div class="title-section">
+				<h3 class="main-title-w3 mb-md-5 mb-4">Want to get in touch? <br>Contact me on
+					<a href="tel:+234-0811-133-6547" class="editContent">phone</a>,
+					<a href="mailto:oseremen2001@gmail.com" class="editContent">email</a>,
+					<a href="https://twitter.com/SamuelOImoisili" class="editContent">twitter</a>
+					or <a href="https://www.linkedin.com/in/samuel-imoisili-713b34185" class="editContent">linkedin</a>.</h3>
+			</div>
+			<form method="POST" class="">
+				{% csrf_token %}
+        <div class="main-input">
+					{{form.as_p}}
+				</div>
+				<div class="text-right">
+					<button type="submit" class="btn-primary btn btn-style">Send</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>
+<!-- //contact form -->
+<!-- Footer -->
+<footer>
+  <section class="w3l-footers-1">
+    <div class="footer py-3">
+      <div class="container">
+        <div class="footer-content">
+          <div class="row">
+            <div class="col-lg-8 footer-left">
+              <p class="m-0">&copy; 2021 Samuel Imoisili. All Rights Reserved. 
+            </div>
+            <div class="col-lg-4 footer-right text-lg-right text-center mt-lg-0 mt-3">
+              <ul class="social m-0 p-0">
+                <li><a href="https://facebook.com/SamuelOseremenImoisili"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://www.linkedin.com/in/samuel-imoisili-713b34185"><span class="fa fa-linkedin"></span></a></li>
+                <li><a href="https://www.instagram.com/samuelimoisili"><span class="fa fa-instagram"></span></a></li>
+                <li><a href="https://twitter.com/SamuelOImoisili"><span class="fa fa-twitter"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
+<!-- //Footer -->
+
+  
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" class="editContent" title="Go to top">
+  <span class="fa fa-angle-up"></span>
+</button>
+<script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction()
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("movetop").style.display = "block";
+    } else {
+      document.getElementById("movetop").style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+<!-- /move top -->
+
+<!-- common jquery -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!-- //common jquery -->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+
+<!-- for blog carousel slider -->
+<script src="{% static 'js/owl.carousel.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+      stagePadding: 20,
+      margin: 15,
+      nav: false,
+      loop: false,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 3
+        }
+      }
+    })
+  })
+</script>
+<!-- //for blog carousel slider -->
+
+
+<!-- stats number counter-->
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.countup.js' %}"></script>
+<script>
+  $('.counter').countUp();
+</script>
+<!-- //stats number counter -->
+
+<!-- jQuery-Photo-filter-lightbox-portfolio-plugin -->
+<script src="{% static 'js/jquery-1.7.2.js' %}"></script>
+<script src="{% static 'js/jquery.quicksand.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+<!-- //jQuery-Photo-filter-lightbox-portfolio-plugin -->
+
+
+<!--  //bootstrap js -->
+<script src="{% static 'js/products.js' %}"></script>
+<script src="{% static 'js/slider.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+
+{% endblock content %}

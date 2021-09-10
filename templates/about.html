@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<header class="wrappings" id="home">
+  <nav>
+    <div class="logo">
+      <a class="navbar-brand" href="{% url 'home_page' %}">
+        <img src="{% static 'images/logo1.jpg' %}" alt="Your logo" title="Your logo" style="height:40px;" />
+      </a>
+    </div>
+    <input type="checkbox" id="show-menu">
+    <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+    <div class="content">
+      <ul class="links">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'home_page' %}" class="desktop-link">Home</a>
+        </li >
+        <li class="nav-item mr-lg-4">
+          <a  class="nav-link pl-0 pr-0" href="{% url 'about' %}" class="desktop-link">About me</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'products' %}" class="desktop-link">Store</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'checkout' %}" class="desktop-link">Cart</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'contact' %}" class="desktop-link">Contact</a>
+        </li>
+        {% else %}
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'home_page' %}" class="desktop-link">Home</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'about' %}" class="desktop-link">About me</a>
+        </li>        
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'contact' %}" class="desktop-link">Contact</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="/accounts/login" class="desktop-link">Login</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="/accounts/signup" class="desktop-link">Sign Up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- about my profile -->
+<section class="w3l-about-bottom py-5" id="about">
+    <div class="container py-lg-5 py-md-3">
+        <div class="row middle-grids">
+            <div class="col-lg-7 advantage-grid-info">
+                <div class="advantage_left">
+                    <h4>About me </h4>
+                    <p class="mb-3">Samuel Oseremen imoisili, professionally known as Imobeatz is a Nigerian beatmaker/artist, designer and digital creator. Born 10th of May 2001, zodiac sign "Taurus". I love arts🎨, animations👽📽, sci-fi movies📽🪐🚀🤖🌌, music🎧🎶 and have an over imaginative mind😎. Passionate about creativity and design</p>
+                    <p class="mb-0">
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-5 advantage-grid-info1">
+                <div class="advantage_left1 mt-lg-0 mt-5">
+                    <img src="{% static 'images/samuel.jpg' %}" class="img img-fluid" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- //about my profile -->
+<!-- gallery-7 -->
+<section class="w3l-gallery-7">
+	<div class="gallery-7_sur py-5">
+		<div class="container py-lg-5">
+			<div id="container">
+				<div class="galleryContainer">
+					<div class="gallery">
+						<input type="radio" name="controls" id="c1" checked><img class="galleryImage img-fluid" id="i1" src="{% static 'images/samuela.jpg' %}" class="img"
+							alt="">
+						<input type="radio" name="controls" id="c2"><img class="galleryImage img-fluid" id="i2" src="{% static 'images/samuelb.jpg' %}" class="img" alt="">
+						<input type="radio" name="controls" id="c3"><img class="galleryImage img-fluid" id="i3" src="{% static 'images/forbes.jpg' %}" class="img" alt="">
+					</div>
+					<div class="thumbnails">
+						<label class="thumbnailImage" for="c1"><img src="{% static 'images/samuela.jpg' %}" class="img img-fluid" alt=""></label>
+						<label class="thumbnailImage" for="c2"><img src="{% static 'images/samuelb.jpg' %}" class="img img-fluid" alt=""></label>
+						<label class="thumbnailImage" for="c3"><img src="{% static 'images/forbes.jpg' %}" class="img img-fluid" alt=""></label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- //gallery-7 -->
+
+<!-- Footer -->
+<footer>
+  <section class="w3l-footers-1">
+    <div class="footer py-3">
+      <div class="container">
+        <div class="footer-content">
+          <div class="row">
+            <div class="col-lg-8 footer-left">
+              <p class="m-0">&copy; 2021 Samuel Imoisili. All Rights Reserved. 
+            </div>
+            <div class="col-lg-4 footer-right text-lg-right text-center mt-lg-0 mt-3">
+              <ul class="social m-0 p-0">
+                <li><a href="https://facebook.com/SamuelOseremenImoisili"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://www.linkedin.com/in/samuel-imoisili-713b34185"><span class="fa fa-linkedin"></span></a></li>
+                <li><a href="https://www.instagram.com/samuelimoisili"><span class="fa fa-instagram"></span></a></li>
+                <li><a href="https://twitter.com/SamuelOImoisili"><span class="fa fa-twitter"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
+<!-- //Footer -->
+
+  
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" class="editContent" title="Go to top">
+  <span class="fa fa-angle-up"></span>
+</button>
+<script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction()
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("movetop").style.display = "block";
+    } else {
+      document.getElementById("movetop").style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+<!-- /move top -->
+
+<!-- common jquery -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!-- //common jquery -->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+
+<!-- for blog carousel slider -->
+<script src="{% static 'js/owl.carousel.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+      stagePadding: 20,
+      margin: 15,
+      nav: false,
+      loop: false,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 3
+        }
+      }
+    })
+  })
+</script>
+<!-- //for blog carousel slider -->
+
+
+<!-- stats number counter-->
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.countup.js' %}"></script>
+<script>
+  $('.counter').countUp();
+</script>
+<!-- //stats number counter -->
+
+<!-- jQuery-Photo-filter-lightbox-portfolio-plugin -->
+<script src="{% static 'js/jquery-1.7.2.js' %}"></script>
+<script src="{% static 'js/jquery.quicksand.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+<!-- //jQuery-Photo-filter-lightbox-portfolio-plugin -->
+
+
+<!--  //bootstrap js -->
+<script src="{% static 'js/products.js' %}"></script>
+<script src="{% static 'js/slider.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+{% endblock content %}

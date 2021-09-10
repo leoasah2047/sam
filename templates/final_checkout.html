@@ -1,0 +1,276 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<header class="wrappings" id="home">
+  <nav>
+    <div class="logo">
+      <a class="navbar-brand" href="{% url 'home_page' %}">
+        <img src="{% static 'images/logo1.jpg' %}" alt="Your logo" title="Your logo" style="height:40px;" />
+      </a>
+    </div>
+    <input type="checkbox" id="show-menu">
+    <label for="show-menu" class="menu-icon"><i class="fas fa-bars"></i></label>
+    <div class="content">
+      <ul class="links">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'home_page' %}" class="desktop-link">Home</a>
+        </li >
+        <li class="nav-item mr-lg-4">
+          <a  class="nav-link pl-0 pr-0" href="{% url 'about' %}" class="desktop-link">About me</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'products' %}" class="desktop-link">Store</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'checkout' %}" class="desktop-link">Cart</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'contact' %}" class="desktop-link">Contact</a>
+        </li>
+        {% else %}
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'home_page' %}" class="desktop-link">Home</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'about' %}" class="desktop-link">About me</a>
+        </li>        
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="{% url 'contact' %}" class="desktop-link">Contact</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="/accounts/login" class="desktop-link">Login</a>
+        </li>
+        <li class="nav-item mr-lg-4">
+          <a class="nav-link pl-0 pr-0" href="/accounts/signup" class="desktop-link">Sign Up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+  <!--Main layout-->
+  <main>
+    <div class="container wow fadeIn">
+
+      <!-- Heading -->
+      <h2 class="my-5 h2 text-center" style="color:white">Checkout form</h2>
+
+      <!--Grid row-->
+      <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+
+          <!--Card-->
+          
+
+        </div>
+        <!--Grid column-->        <!--Grid column-->
+        <div class="col-md-12 mb-4">
+
+          <!-- Heading -->
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+            <span class="badge badge-secondary badge-pill">{{order.items.count}} item(s)</span>
+          </h4>
+
+          <!-- Cart -->
+          <ul class="list-group mb-3 z-depth-1">
+            {% for order_item in order.items.all %}
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">{{order_item.quantity}} x {{ order_item.item.title }}</h6>
+                <small class="text-muted">{{ order_item.item.description }}</small>
+              </div>
+              <span class="text-muted">₦{{ order_item.get_final_price }}</span>
+            </li>   
+            {% endfor %} 
+            
+          <!-- Cart -->
+
+          <!-- Promo code -->
+          <div class="card">
+
+            <!--Card content-->
+            
+              <form class="card-body"> 
+                <script src="https://js.paystack.co/v1/inline.js"></script>
+                <button class="btn btn-primary btn-lg btn-block" type="button" onclick="payWithPaystack()"> Pay For Your Orders </button> 
+              </form>
+              
+
+            
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+
+   <!-- Footer -->
+ <footer>
+  <section class="w3l-footers-1">
+    <div class="footer py-3">
+      <div class="container">
+        <div class="footer-content">
+          <div class="row">
+            <div class="col-lg-8 footer-left">
+              <p class="m-0">&copy; 2021 Samuel Imoisili. All Rights Reserved. 
+            </div>
+            <div class="col-lg-4 footer-right text-lg-right text-center mt-lg-0 mt-3">
+              <ul class="social m-0 p-0">
+                <li><a href="https://facebook.com/SamuelOseremenImoisili"><span class="fa fa-facebook"></span></a></li>
+                <li><a href="https://www.linkedin.com/in/samuel-imoisili-713b34185"><span class="fa fa-linkedin"></span></a></li>
+                <li><a href="https://www.instagram.com/samuelimoisili"><span class="fa fa-instagram"></span></a></li>
+                <li><a href="https://twitter.com/SamuelOImoisili"><span class="fa fa-twitter"></span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</footer>
+<!-- //Footer -->
+
+    
+<script>
+  function payWithPaystack(){
+    var handler = PaystackPop.setup({
+      key: 'pk_live_a6a77f8e03a34b542c47a3d27c150a991719cf98',
+      email: '{{user.email}}',
+      amount: {{order.get_total}} * 100,
+      ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+      metadata: {
+         custom_fields: [
+            {
+                display_name: "Samuel Dave",
+                variable_name: "mobile_number",
+                value: "+2348012345678"
+            }
+         ]
+      },
+      callback: function(response){
+          datar = response.reference
+          $.ajax({
+            url: '/verify/'+ datar,
+            method: 'GET',
+
+            success: function (response) {
+              window.location.href = "/verify/" + datar
+            }
+          });
+      },
+      onClose: function(){
+          alert('window closed');
+      }
+    });
+    handler.openIframe();
+  }
+</script>
+  
+
+  
+<!-- move top -->
+<button onclick="topFunction()" id="movetop" class="editContent" title="Go to top">
+  <span class="fa fa-angle-up"></span>
+</button>
+<script>
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction()
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      document.getElementById("movetop").style.display = "block";
+    } else {
+      document.getElementById("movetop").style.display = "none";
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+<!-- /move top -->
+
+<!-- common jquery -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<!-- //common jquery -->
+
+<!-- disable body scroll which navbar is in active -->
+<script>
+  $(function () {
+    $('.navbar-toggler').click(function () {
+      $('body').toggleClass('noscroll');
+    })
+  });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+
+<!-- for blog carousel slider -->
+<script src="{% static 'js/owl.carousel.js' %}"></script>
+<script>
+  $(document).ready(function () {
+    var owl = $('.owl-carousel');
+    owl.owlCarousel({
+      stagePadding: 20,
+      margin: 15,
+      nav: false,
+      loop: false,
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 3
+        }
+      }
+    })
+  })
+</script>
+<!-- //for blog carousel slider -->
+
+
+<!-- stats number counter-->
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/jquery.countup.js' %}"></script>
+<script>
+  $('.counter').countUp();
+</script>
+<!-- //stats number counter -->
+
+<!-- jQuery-Photo-filter-lightbox-portfolio-plugin -->
+<script src="{% static 'js/jquery-1.7.2.js' %}"></script>
+<script src="{% static 'js/jquery.quicksand.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+<!-- //jQuery-Photo-filter-lightbox-portfolio-plugin -->
+
+
+<!--  //bootstrap js -->
+<script src="{% static 'js/products.js' %}"></script>
+<script src="{% static 'js/slider.js' %}"></script>
+<script src="{% static 'js/index.js' %}"></script>
+
+  <!--Main layout-->
+
+
+{% endblock content %}
