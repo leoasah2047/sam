@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CheckoutForm, ContactForm
-from pypaystack import Transaction
+from paystackapi.transaction import Transaction
 from django.http import JsonResponse, HttpResponse
 import json
 from .filters import ItemFilter
