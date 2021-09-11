@@ -1,1 +1,1 @@
-web:gunicorn foodstore.wsgi --log-file -
+web: gunicorn foodstore.wsgi --log-file -
