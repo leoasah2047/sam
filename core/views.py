@@ -180,9 +180,9 @@ def final_checkout(request):
 
 class PaymentView(View):
     def get(self, *args, **kwargs):
-        transaction = Transaction(
-            authorization_key='sk_test_4efc8832170a975a1e1eb669a89b512909d0049a')
-        response = transaction.verify(kwargs['id'])
+        #transaction = Transaction.verify(
+            #authorization_key='sk_test_4efc8832170a975a1e1eb669a89b512909d0049a')
+        response = Transaction.verify(kwargs['id'])
         data = JsonResponse(response, safe=False)
 
         if response[3]:
@@ -209,7 +209,7 @@ class PaymentView(View):
                 return redirect("download")
             except ObjectDoesNotExist:
                 messages.success(self.request, "Your order was successful")
-                return redirect("/")
+                return redirect("download")
         else:
             messages.danger(self.request, "Could not verify the transaction")
             return redirect("/")
