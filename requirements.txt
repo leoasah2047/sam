@@ -16,6 +16,7 @@ oauthlib==3.0.1
 Paperboy==1.0.1
 pep8==1.7.1
 Pillow==8.3.2
+psycopg2==2.9.1
 pycodestyle==2.5.0
 python-dateutil==2.8.1
 python-decouple==3.1
